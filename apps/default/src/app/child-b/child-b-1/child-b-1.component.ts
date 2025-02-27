@@ -9,7 +9,7 @@ import { flashAnimation } from '../../flash.animation';
       <h1>{{ title }}</h1>
       <hr />
       <h3>Render: {{ renderCounter }}</h3>
-      <h3>CD: {{ changeDetectionCounter }}</h3>
+      <h3>CD cycles: {{ changeDetectionCounter }}</h3>
       <hr />
       <button (click)="handleClick()">Click me!</button>
     </div>
@@ -21,14 +21,15 @@ export class ChildB1Component implements DoCheck {
 
   get title() {
     this.renderCounter++;
-    return 'Child B - 1';
+    return 'Child B1';
   }
 
   handleClick() {
-    console.log('Siuuu!!!');
+    console.log('[Child B1]: Click event');
   }
 
   ngDoCheck() {
+    console.log('[Child B1]: Change detection cycle');
     this.changeDetectionCounter++;
   }
 }
