@@ -1,9 +1,11 @@
 import { Component, DoCheck } from '@angular/core';
+import { flashAnimation } from '../../flash.animation';
 
 @Component({
   selector: 'app-child-a-2',
+  animations: [flashAnimation('800ms')],
   template: `
-    <div class="component">
+    <div class="component" [@flashAnimation]="renderCounter">
       <h1>{{ title }}</h1>
       <hr />
       <h3>Render: {{ renderCounter }}</h3>

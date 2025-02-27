@@ -1,9 +1,11 @@
 import { Component, DoCheck } from '@angular/core';
+import { flashAnimation } from '../../flash.animation';
 
 @Component({
   selector: 'app-child-b-1',
+  animations: [flashAnimation('1000ms')],
   template: `
-    <div class="component">
+    <div class="component" [@flashAnimation]="renderCounter">
       <h1>{{ title }}</h1>
       <hr />
       <h3>Render: {{ renderCounter }}</h3>
@@ -11,7 +13,7 @@ import { Component, DoCheck } from '@angular/core';
       <hr />
       <button (click)="handleClick()">Click me!</button>
     </div>
-  `
+  `,
 })
 export class ChildB1Component implements DoCheck {
   renderCounter = 0;
