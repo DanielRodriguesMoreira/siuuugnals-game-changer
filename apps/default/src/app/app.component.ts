@@ -10,16 +10,21 @@ import { ChildB1Component } from './child-b/child-b-1/child-b-1.component';
   selector: 'app-root',
   template: `
     <app-parent />
+    <div class="children-connector"></div>
     <div class="children">
       <app-child-a />
       <app-child-b />
     </div>
     <div class="grandchildren">
-      <div class="group">
-        <app-child-a-1 />
-        <app-child-a-2 />
+      <div>
+        <div class="children-connector"></div>
+        <div class="group">
+          <app-child-a-1 />
+          <app-child-a-2 />
+        </div>
       </div>
-      <div class="group">
+      <div class="single-children-group">
+        <div class="single-children-connector"></div>
         <app-child-b-1 />
       </div>
     </div>

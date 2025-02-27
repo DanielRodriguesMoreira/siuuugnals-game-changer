@@ -31,19 +31,35 @@ app-parent {
 .children {
   display: flex;
   justify-content: space-around;
-  margin: 50px 0;
 }
 
 .grandchildren {
-  display: flex;
+  display: grid;
+  grid-template-columns: 50% 50%;
 
   .group {
     display: flex;
-    justify-content: center;
-    width: 50%;
+    justify-content: space-around;
   }
 
-  .group:first-child {
-    gap: 50px
+  .single-children-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
+}
+
+.children-connector {
+  width: 50%;
+  border: 2px solid;
+  margin: auto;
+  height: 50px;
+  border-bottom: 0;
+}
+
+.single-children-connector {
+  width: 0;
+  border: 1px solid;
+  height: 50px;
+  margin: auto;
 }
