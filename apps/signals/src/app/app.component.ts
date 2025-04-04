@@ -1,22 +1,46 @@
 import { Component } from '@angular/core';
-import { RootComponent } from './root/root.component';
 import { ChildAComponent } from './child-a/child-a.component';
 import { ChildBComponent } from './child-b/child-b.component';
+import { flashAnimation } from './flash.animation';
 
 @Component({
   selector: 'app-root',
+  animations: [flashAnimation()],
   template: `
-    <app-parent />
+    <div class="component" [@flashAnimation]="changeDetectionCounter">
+      <h1>{{ title }}</h1>
+      <hr />
+
+      <h1>CD: {{ changeDetectionCounter }}</h1>
+      <hr />
+
+      <button (click)="handleClick()">Click me!</button>
+
+      @if (onPush) {
+      <div class="on-push">
+        <span>OnPush</span>
+      </div>
+      }
+    </div>
+
     <div class="children-connector"></div>
     <div class="children">
       <app-child-a />
       <app-child-b />
     </div>
   `,
-  imports: [
-    RootComponent,
-    ChildAComponent,
-    ChildBComponent
-  ],
+  imports: [ChildAComponent, ChildBComponent]
 })
-export class AppComponent {}
+export class AppComponent {
+  changeDetectionCounter = 0;
+  onPush = false;
+
+  get title() {
+    this.changeDetectionCounter++;
+    return 'Root';
+  }
+
+  handleClick() {
+    console.log('[Root]: Click event');
+  }
+}

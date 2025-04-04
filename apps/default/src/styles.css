@@ -32,11 +32,6 @@ button {
   }
 }
 
-app-parent {
-  display: flex;
-  justify-content: center;
-}
-
 .children {
   display: grid;
   grid-template-columns: 50% 50%;

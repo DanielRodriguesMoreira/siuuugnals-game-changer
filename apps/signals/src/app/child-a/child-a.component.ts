@@ -18,9 +18,9 @@ import { flashAnimation } from '../flash.animation';
       <button (click)="handleClick()">Click me!</button>
 
       @if (onPush) {
-        <div class="on-push">
-          <span>OnPush</span>
-        </div>
+      <div class="on-push">
+        <span>OnPush</span>
+      </div>
       }
     </div>
     <div class="children-connector"></div>
@@ -28,7 +28,7 @@ import { flashAnimation } from '../flash.animation';
       <app-child-a-1 />
       <app-child-a-2 />
     </div>
-  `,
+  `
 })
 export class ChildAComponent {
   changeDetectionCounter = 0;

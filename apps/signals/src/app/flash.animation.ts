@@ -9,13 +9,3 @@ export function flashAnimation(delay = '0ms') {
     ])
   ])
 }
-
-export function fontColorAnimation(delay = '0ms') {
-  return trigger('fontColorAnimation', [
-    transition(':increment', [
-      animate(`500ms ${delay}`, keyframes([
-        style({ color: 'red', offset: 1 })
-      ]))
-    ])
-  ])
-}

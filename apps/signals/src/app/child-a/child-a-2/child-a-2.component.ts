@@ -15,9 +15,9 @@ import { flashAnimation } from '../../flash.animation';
       <button (click)="handleClick()">Click me!</button>
 
       @if (onPush) {
-        <div class="on-push">
-          <span>OnPush</span>
-        </div>
+      <div class="on-push">
+        <span>OnPush</span>
+      </div>
       }
     </div>
   `
