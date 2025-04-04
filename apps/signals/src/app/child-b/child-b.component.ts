@@ -1,57 +1,44 @@
-import { Component, computed, DoCheck, effect, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChildB1Component } from './child-b-1/child-b-1.component';
 import { flashAnimation } from '../flash.animation';
 
 @Component({
   selector: 'app-child-b',
-  animations: [flashAnimation('400ms')],
+  animations: [flashAnimation('800ms')],
   template: `
-    <div class="component with-on-push">
+    <div class="component" [@flashAnimation]="changeDetectionCounter">
       <h1>{{ title }}</h1>
       <hr />
-      <div [@flashAnimation]="signalX()">
-        <h3>Signal X: {{ signalX() }}</h3>
-      </div>
-      <div [@flashAnimation]="signalY()">
-        <h3>Signal Y: {{ signalY() }}</h3>
-      </div>
-      <h3>CD cycles: {{ changeDetectionCounter }}</h3>
+
+      <h1>CD: {{ changeDetectionCounter }}</h1>
       <hr />
-      <button (click)="handleClickX()">Update Signal X</button>
-      <button (click)="handleClickY()">Update Signal Y</button>
+
+      <button (click)="handleClick()">Click me!</button>
+
+      @if (onPush) {
+        <div class="on-push">
+          <span>OnPush</span>
+        </div>
+      }
     </div>
-  `
+    <div class="single-children-group">
+      <div class="single-children-connector"></div>
+      <app-child-b-1 />
+    </div>
+  `,
+  imports: [ChildB1Component],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ChildBComponent implements DoCheck {
-  signalX = signal(0);
-  signalY = signal(0);
+export class ChildBComponent {
   changeDetectionCounter = 0;
-
-  constructor() {
-    effect(() => {
-      console.log(`[Child B - Signal X]: Render: ${this.signalX()}`);
-    });
-
-    effect(() => {
-      console.log(`[Child B - Signal Y]: Render: ${this.signalY()}`);
-    });
-  }
+  onPush = true;
 
   get title() {
+    this.changeDetectionCounter++;
     return 'Child B';
   }
 
-  handleClickX() {
-    this.signalX.update(value => value + 1);
-    console.log('[Child B]: Update Signal X event');
-  }
-
-  handleClickY() {
-    this.signalY.update(value => value + 1);
-    console.log('[Child B]: Update Signal Y event');
-  }
-
-  ngDoCheck() {
-    console.log('[Child B]: Change detection cycle');
-    this.changeDetectionCounter++;
+  handleClick() {
+    console.log('[Child B]: Click event');
   }
 }

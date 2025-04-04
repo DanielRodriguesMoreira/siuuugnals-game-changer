@@ -1,35 +1,37 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
 import { flashAnimation } from '../flash.animation';
 
 @Component({
   selector: 'app-parent',
   animations: [flashAnimation()],
   template: `
-    <div class="component" [@flashAnimation]="renderCounter">
+    <div class="component" [@flashAnimation]="changeDetectionCounter">
       <h1>{{ title }}</h1>
       <hr />
-      <h3>Render: {{ renderCounter }}</h3>
-      <h3>CD cycles: {{ changeDetectionCounter }}</h3>
+
+      <h1>CD: {{ changeDetectionCounter }}</h1>
       <hr />
+
       <button (click)="handleClick()">Click me!</button>
+
+      @if (onPush) {
+        <div class="on-push">
+          <span>OnPush</span>
+        </div>
+      }
     </div>
   `
 })
-export class RootComponent implements DoCheck {
-  renderCounter = 0;
+export class RootComponent {
   changeDetectionCounter = 0;
+  onPush = false;
 
   get title() {
-    this.renderCounter++;
+    this.changeDetectionCounter++;
     return 'Root';
   }
 
   handleClick() {
     console.log('[Root]: Click event');
-  }
-
-  ngDoCheck() {
-    console.log('[Root]: Change detection cycle');
-    this.changeDetectionCounter++;
   }
 }

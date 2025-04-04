@@ -1,35 +1,43 @@
-import { Component, DoCheck } from '@angular/core';
+import { Component } from '@angular/core';
+import { ChildB1Component } from './child-b-1/child-b-1.component';
 import { flashAnimation } from '../flash.animation';
 
 @Component({
   selector: 'app-child-b',
-  animations: [flashAnimation('400ms')],
+  animations: [flashAnimation('800ms')],
   template: `
-    <div class="component" [@flashAnimation]="renderCounter">
+    <div class="component" [@flashAnimation]="changeDetectionCounter">
       <h1>{{ title }}</h1>
       <hr />
-      <h3>Render: {{ renderCounter }}</h3>
-      <h3>CD cycles: {{ changeDetectionCounter }}</h3>
+
+      <h1>CD: {{ changeDetectionCounter }}</h1>
       <hr />
+
       <button (click)="handleClick()">Click me!</button>
+
+      @if (onPush) {
+        <div class="on-push">
+          <span>OnPush</span>
+        </div>
+      }
     </div>
-  `
+    <div class="single-children-group">
+      <div class="single-children-connector"></div>
+      <app-child-b-1 />
+    </div>
+  `,
+  imports: [ChildB1Component]
 })
-export class ChildBComponent implements DoCheck {
-  renderCounter = 0;
+export class ChildBComponent {
   changeDetectionCounter = 0;
+  onPush = false;
 
   get title() {
-    this.renderCounter++;
+    this.changeDetectionCounter++;
     return 'Child B';
   }
 
   handleClick() {
     console.log('[Child B]: Click event');
-  }
-
-  ngDoCheck() {
-    console.log('[Child B]: Change detection cycle');
-    this.changeDetectionCounter++;
   }
 }
