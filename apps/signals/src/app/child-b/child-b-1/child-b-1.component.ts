@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { flashAnimation } from '../../flash.animation';
 
 @Component({
@@ -10,6 +10,7 @@ import { flashAnimation } from '../../flash.animation';
       <hr />
 
       <h1>CD: {{ changeDetectionCounter }}</h1>
+      <h1>Signal: {{ counterSignal() }}</h1>
       <hr />
 
       <button (click)="handleClick()">Click me!</button>
@@ -26,6 +27,8 @@ import { flashAnimation } from '../../flash.animation';
 export class ChildB1Component {
   changeDetectionCounter = 0;
   onPush = true;
+
+  counterSignal = signal(0);
 
   get title() {
     this.changeDetectionCounter++;
