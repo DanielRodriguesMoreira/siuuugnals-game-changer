@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +12,8 @@ import { Component } from '@angular/core';
 
       <button (click)="handleClick()">Click me!</button>
     </div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   counter = 0;
