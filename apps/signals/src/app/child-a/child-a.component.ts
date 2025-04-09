@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { ChildA2Component } from './child-a-2/child-a-2.component';
 import { ChildA1Component } from './child-a-1/child-a-1.component';
 import { flashAnimation } from '../flash.animation';
@@ -28,11 +28,12 @@ import { flashAnimation } from '../flash.animation';
       <app-child-a-1 />
       <app-child-a-2 />
     </div>
-  `
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChildAComponent {
   changeDetectionCounter = 0;
-  onPush = false;
+  onPush = true;
 
   get title() {
     this.changeDetectionCounter++;
