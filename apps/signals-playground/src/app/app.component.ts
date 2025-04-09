@@ -22,3 +22,9 @@ export class AppComponent {
     this.counter = this.counter + 1;
   }
 }
+
+// Writable
+// Computed
+// Effect
+// Input (output)
+// Model

@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'app-child',
@@ -11,7 +11,9 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class ChildComponent {
   @Input() counter = 0;
 
+  @Output() resetCounter = new EventEmitter<number>();
+
   handleClick() {
-    this.counter = 0;
+    // empty by design
   }
 }
